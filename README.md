@@ -3,7 +3,9 @@
 ## Measurement #1: Precision
 measured rdstsc and clock, with rdtsc being more precise
 ## Measurement #2: Kernel
+```
 call 1 - getpid
-call 2 - ?
-call 3 - ?
+call 2 - getuid
+call 3 - stat
+```
 ## Measurement #3: Communication
