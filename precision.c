@@ -16,8 +16,13 @@ void precision_test_2(){
     for (int i = 0; i < 40; i++) {
         clock_t start, end;
         double cpu_time_used;
+        int x, y, z;
         start = clock();
-        int x = 1;
+        for (int j = 0; j < 30; j++){
+            x = 1;
+            y = 2;
+            z = 3;
+        }
         end = clock();
         cpu_time_used = (double)((end - start) * S_TO_NS / CLOCKS_PER_SEC);
         printf("TEST2: %d: clock(3) elapsed time %f\n",i, cpu_time_used);
@@ -32,7 +37,7 @@ void precision_test_1(){
     for (int i = 0; i < 40; i++) {
         uint64_t tick1, tick2; //unsigned 64 bit quantity
         unsigned a, b, c, d;
-        int x,y,z;
+        int x, y, z;
         asm volatile("rdtsc" : "=a" (a), "=d" (b)); //assembly code running the instruction rdts
         for (int j = 0; j < 30; j++){
             x = 1;
