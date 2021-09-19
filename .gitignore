@@ -1,4 +1,5 @@
 *.o
 run
 precision
+kernel
 *.bak
