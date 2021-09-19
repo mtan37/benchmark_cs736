@@ -2,13 +2,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <inttypes.h>
-
+#include "benchutil.h"
 #include <sys/stat.h>
-
-uint64_t calculate_tick(unsigned a, unsigned b) {
-    uint64_t tick;
-    tick = (((uint64_t)a) | (((uint64_t)b) << 32));// calculating tick value
-}
 
 void getpid_test(){
     unsigned long s_to_ns = 1000000000;

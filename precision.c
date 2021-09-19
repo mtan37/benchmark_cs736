@@ -3,11 +3,7 @@
 #include <inttypes.h>
 #include <sys/time.h>
 #include <time.h>
-
-uint64_t calculate_tick(unsigned a, unsigned b) {
-    uint64_t tick;
-    tick = (((uint64_t)a) | (((uint64_t)b) << 32));// calculating tick value
-}
+#include "benchutil.h"
 /*
  * Reference: https://www.gnu.org/software/libc/manual/html_node/CPU-Time.html
  */
