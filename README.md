@@ -6,6 +6,6 @@ measured rdstsc and clock, with rdtsc being more precise
 ```
 call 1 - getpid
 call 2 - getuid
-call 3 - stat
+call 3 - stat, for file /proc/cpuinfo
 ```
 ## Measurement #3: Communication
