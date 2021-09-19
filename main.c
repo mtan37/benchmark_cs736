@@ -3,7 +3,10 @@
 #include <inttypes.h>
 #include <sys/time.h>
 #include <time.h>
-
+uint64_t calculate_tick(unsigned a, unsigned b) {
+    uint64_t tick;
+    tick = (((uint64_t)a) | (((uint64_t)b) << 32));// calculating tick value
+}
 /*
  * Reference: https://www.gnu.org/software/libc/manual/html_node/CPU-Time.html
  */
@@ -37,8 +40,8 @@ void precision_test_1(){
             z = 3;
         }
         asm volatile("rdtsc" : "=a" (c), "=d" (d)); //assembly code running the instruction rdtsc
-        tick1 = (((uint64_t)a) | (((uint64_t)b) << 32)); // calculating the tick value.
-        tick2 = (((uint64_t)c) | (((uint64_t)d) << 32)); // calculating the tick value.
+        tick1 = calculate_tick(a,b);
+        tick2 = calculate_tick(c,d);
         printf("TEST1: %d , rdtsc elapsed time %lu\n",i, (unsigned)(tick2 - tick1)*S_TO_NS/3200000000);
     }
 }
