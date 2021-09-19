@@ -1,0 +1,80 @@
+TEST1: 0 , rdtsc elapsed time(double) 283.750000
+TEST1: 1 , rdtsc elapsed time(double) 263.750000
+TEST1: 2 , rdtsc elapsed time(double) 223.750000
+TEST1: 3 , rdtsc elapsed time(double) 152.500000
+TEST1: 4 , rdtsc elapsed time(double) 160.000000
+TEST1: 5 , rdtsc elapsed time(double) 156.250000
+TEST1: 6 , rdtsc elapsed time(double) 160.000000
+TEST1: 7 , rdtsc elapsed time(double) 156.250000
+TEST1: 8 , rdtsc elapsed time(double) 151.250000
+TEST1: 9 , rdtsc elapsed time(double) 156.250000
+TEST1: 10 , rdtsc elapsed time(double) 156.250000
+TEST1: 11 , rdtsc elapsed time(double) 160.000000
+TEST1: 12 , rdtsc elapsed time(double) 156.250000
+TEST1: 13 , rdtsc elapsed time(double) 152.500000
+TEST1: 14 , rdtsc elapsed time(double) 155.000000
+TEST1: 15 , rdtsc elapsed time(double) 155.000000
+TEST1: 16 , rdtsc elapsed time(double) 160.000000
+TEST1: 17 , rdtsc elapsed time(double) 156.250000
+TEST1: 18 , rdtsc elapsed time(double) 152.500000
+TEST1: 19 , rdtsc elapsed time(double) 151.250000
+TEST1: 20 , rdtsc elapsed time(double) 152.500000
+TEST1: 21 , rdtsc elapsed time(double) 156.250000
+TEST1: 22 , rdtsc elapsed time(double) 156.250000
+TEST1: 23 , rdtsc elapsed time(double) 165.000000
+TEST1: 24 , rdtsc elapsed time(double) 156.250000
+TEST1: 25 , rdtsc elapsed time(double) 156.250000
+TEST1: 26 , rdtsc elapsed time(double) 156.250000
+TEST1: 27 , rdtsc elapsed time(double) 156.250000
+TEST1: 28 , rdtsc elapsed time(double) 152.500000
+TEST1: 29 , rdtsc elapsed time(double) 156.250000
+TEST1: 30 , rdtsc elapsed time(double) 151.250000
+TEST1: 31 , rdtsc elapsed time(double) 155.000000
+TEST1: 32 , rdtsc elapsed time(double) 163.750000
+TEST1: 33 , rdtsc elapsed time(double) 160.000000
+TEST1: 34 , rdtsc elapsed time(double) 171.250000
+TEST1: 35 , rdtsc elapsed time(double) 152.500000
+TEST1: 36 , rdtsc elapsed time(double) 156.250000
+TEST1: 37 , rdtsc elapsed time(double) 156.250000
+TEST1: 38 , rdtsc elapsed time(double) 152.500000
+TEST1: 39 , rdtsc elapsed time(double) 155.000000
+TEST2: 0: clock(3) elapsed time 3000.000000
+TEST2: 1: clock(3) elapsed time 2000.000000
+TEST2: 2: clock(3) elapsed time 2000.000000
+TEST2: 3: clock(3) elapsed time 2000.000000
+TEST2: 4: clock(3) elapsed time 2000.000000
+TEST2: 5: clock(3) elapsed time 2000.000000
+TEST2: 6: clock(3) elapsed time 2000.000000
+TEST2: 7: clock(3) elapsed time 2000.000000
+TEST2: 8: clock(3) elapsed time 1000.000000
+TEST2: 9: clock(3) elapsed time 2000.000000
+TEST2: 10: clock(3) elapsed time 2000.000000
+TEST2: 11: clock(3) elapsed time 2000.000000
+TEST2: 12: clock(3) elapsed time 2000.000000
+TEST2: 13: clock(3) elapsed time 2000.000000
+TEST2: 14: clock(3) elapsed time 2000.000000
+TEST2: 15: clock(3) elapsed time 2000.000000
+TEST2: 16: clock(3) elapsed time 2000.000000
+TEST2: 17: clock(3) elapsed time 2000.000000
+TEST2: 18: clock(3) elapsed time 2000.000000
+TEST2: 19: clock(3) elapsed time 2000.000000
+TEST2: 20: clock(3) elapsed time 2000.000000
+TEST2: 21: clock(3) elapsed time 2000.000000
+TEST2: 22: clock(3) elapsed time 2000.000000
+TEST2: 23: clock(3) elapsed time 2000.000000
+TEST2: 24: clock(3) elapsed time 2000.000000
+TEST2: 25: clock(3) elapsed time 2000.000000
+TEST2: 26: clock(3) elapsed time 2000.000000
+TEST2: 27: clock(3) elapsed time 2000.000000
+TEST2: 28: clock(3) elapsed time 2000.000000
+TEST2: 29: clock(3) elapsed time 2000.000000
+TEST2: 30: clock(3) elapsed time 2000.000000
+TEST2: 31: clock(3) elapsed time 2000.000000
+TEST2: 32: clock(3) elapsed time 2000.000000
+TEST2: 33: clock(3) elapsed time 2000.000000
+TEST2: 34: clock(3) elapsed time 2000.000000
+TEST2: 35: clock(3) elapsed time 2000.000000
+TEST2: 36: clock(3) elapsed time 2000.000000
+TEST2: 37: clock(3) elapsed time 2000.000000
+TEST2: 38: clock(3) elapsed time 2000.000000
+TEST2: 39: clock(3) elapsed time 2000.000000
