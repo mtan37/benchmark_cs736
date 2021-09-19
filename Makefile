@@ -19,3 +19,4 @@ clean:
 	rm *.o
 	rm precision
 	rm kernel
+	rm socketpair
