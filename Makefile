@@ -7,13 +7,13 @@ kernel: kernel.o benchutil.o
 socketpair: socketpair.o benchutil.o
 	gcc -Wall -o socketpair socketpair.o benchutil.o
 
-socketpair.o: socketpair.c
+socketpair.o: socketpair.c benchutil.h
 	gcc -c socketpair.c
-kernel.o: kernel.c
+kernel.o: kernel.c benchutil.h
 	gcc -c kernel.c
-precision.o: precision.c
+precision.o: precision.c benchutil.h
 	gcc -c precision.c
-benchutil.o: benchutil.c
+benchutil.o: benchutil.c benchutil.h
 	gcc -c benchutil.c
 clean:
 	rm *.o

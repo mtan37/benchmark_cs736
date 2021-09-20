@@ -6,7 +6,6 @@
 #include <sys/stat.h>
 
 void getpid_test(){
-    unsigned long s_to_ns = 1000000000;
     uint64_t tick1, tick2; //unsigned 64 bit quantity
     unsigned a, b, c, d;
     double result = -1;
@@ -19,7 +18,7 @@ void getpid_test(){
         asm volatile("rdtsc" : "=a" (c), "=d" (d)); //assembly code running the instruction rdtsc
         tick1 = calculate_tick(a,b);
         tick2 = calculate_tick(c,d);
-        double diff = (double)(tick2 - tick1)*s_to_ns/3200000000;
+        double diff = tick_to_ns(tick2, tick1);
         //printf("#%d getpid() elapsed time(double) %f\n",i+1, diff);
     
         if (result == -1 || diff < result){
@@ -31,7 +30,6 @@ void getpid_test(){
 
 
 void getuid_test(){
-    unsigned long s_to_ns = 1000000000;
     uint64_t tick1, tick2; //unsigned 64 bit quantity
     unsigned a, b, c, d;
     double result = -1;
@@ -44,7 +42,7 @@ void getuid_test(){
         asm volatile("rdtsc" : "=a" (c), "=d" (d)); //assembly code running the instruction rdtsc
         tick1 = calculate_tick(a,b);
         tick2 = calculate_tick(c,d);
-        double diff = (double)(tick2 - tick1)*s_to_ns/3200000000;
+        double diff = tick_to_ns(tick2, tick1);
         //printf("#%d getpid() elapsed time(double) %f\n",i+1, diff);
     
         if (result == -1 || diff < result){
@@ -55,7 +53,6 @@ void getuid_test(){
 }
 
 void stat_test(){
-    unsigned long s_to_ns = 1000000000;
     uint64_t tick1, tick2; //unsigned 64 bit quantity
     unsigned a, b, c, d;
     double result = -1;
@@ -71,7 +68,7 @@ void stat_test(){
         asm volatile("rdtsc" : "=a" (c), "=d" (d)); //assembly code running the instruction rdtsc
         tick1 = calculate_tick(a,b);
         tick2 = calculate_tick(c,d);
-        double diff = (double)(tick2 - tick1)*s_to_ns/3200000000;
+        double diff = tick_to_ns(tick2, tick1);
         //printf("#%d getpid() elapsed time(double) %f\n",i+1, diff);
     
         if (result == -1 || diff < result){

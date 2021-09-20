@@ -1,6 +1,5 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include <inttypes.h>
 #include <sys/time.h>
 #include <time.h>
 #include "benchutil.h"
@@ -8,8 +7,6 @@
  * Reference: https://www.gnu.org/software/libc/manual/html_node/CPU-Time.html
  */
 void precision_test_2(){
-    unsigned long S_TO_NS = 1000000000;
-
     for (int i = 0; i < 40; i++) {
         clock_t start, end;
         double cpu_time_used;
@@ -29,7 +26,6 @@ void precision_test_2(){
  * Source: https://tuxthink.blogspot.com/2010/05/using-rdtsc-with-gcc.html
  */
 void precision_test_1(){
-    unsigned long S_TO_NS = 1000000000;
 
     for (int i = 0; i < 40; i++) {
         uint64_t tick1, tick2; //unsigned 64 bit quantity
@@ -44,7 +40,8 @@ void precision_test_1(){
         asm volatile("rdtsc" : "=a" (c), "=d" (d)); //assembly code running the instruction rdtsc
         tick1 = calculate_tick(a,b);
         tick2 = calculate_tick(c,d);
-        printf("TEST1: %d , rdtsc elapsed time(double) %f\n",i, (double)(tick2 - tick1)*S_TO_NS/3200000000);
+        double diff = tick_to_ns(tick2, tick1);
+        printf("TEST1: %d , rdtsc elapsed time(double) %f\n",i, diff);
     }
 }
 
