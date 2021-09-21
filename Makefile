@@ -1,14 +1,14 @@
 #make file for the c practive program
-all: precision kernel socketpair
+all: precision kernel socketpair_latency
 precision: precision.o benchutil.o
 	gcc -Wall -o precision precision.o benchutil.o
 kernel: kernel.o benchutil.o
 	gcc -Wall -o kernel kernel.o benchutil.o
-socketpair: socketpair.o benchutil.o
-	gcc -Wall -o socketpair socketpair.o benchutil.o
+socketpair_latency: socketpair_latency.o benchutil.o
+	gcc -Wall -o socketpair_latency socketpair_latency.o benchutil.o
 
-socketpair.o: socketpair.c benchutil.h
-	gcc -c socketpair.c
+socketpair_latency.o: socketpair_latency.c benchutil.h
+	gcc -c socketpair_latency.c
 kernel.o: kernel.c benchutil.h
 	gcc -c kernel.c
 precision.o: precision.c benchutil.h
@@ -19,4 +19,4 @@ clean:
 	rm *.o
 	rm precision
 	rm kernel
-	rm socketpair
+	rm socketpair_latency
