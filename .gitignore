@@ -2,6 +2,7 @@
 run
 precision
 kernel
-socketpair
+socketpair_throughput
+socketpair_latency
 *.bak
 .*
