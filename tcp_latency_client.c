@@ -18,8 +18,8 @@ int make_connection(char *server_host, const long SERVER_PORT) {
     // bind socket to a port 23576 
     server.sin_family = AF_INET;
     server.sin_port=htons(SERVER_PORT);
-    //server.sin_addr.s_addr = inet_addr(server_host);
-    server.sin_addr.s_addr = htonl(INADDR_ANY);
+    server.sin_addr.s_addr = inet_addr(server_host);
+    //server.sin_addr.s_addr = htonl(INADDR_ANY);
     
     if (0 > connect(socket_fd, (struct sockaddr *)&server, sizeof(server))){
         fprintf(stderr, "To server %s connection failed\n", server_host); 
