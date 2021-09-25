@@ -54,7 +54,7 @@ double measure_latency(size_t m_size, int client_socket){
     memset(server_buf, '0', sizeof(server_buf));
     
     //rest for a second...
-    sleep(0.1);  
+    sleep(0.5);  
 
     asm volatile("rdtsc" : "=a" (a), "=d" (b)); //assembly code running the instruction rdtsc
     /****/
@@ -84,30 +84,31 @@ double measure_latency(size_t m_size, int client_socket){
 int main(int argc , char *argv[]) {
     char *host = argv[1];
     char *ptr;
-    int m_size = strtol(argv[2], &ptr, 10);
-    int port = strtol(argv[3], &ptr, 10);
-    const int TEST_COUNT = strtol(argv[4], &ptr, 10);
-
-    double result_final;
+    int port = strtol(argv[2], &ptr, 10);
+    const int TEST_COUNT = strtol(argv[3], &ptr, 10);
+    int m_sizes[10] = {4, 16, 64, 256, 1024, 4 * 1024, 16 * 1024, 64 * 1024, 256 * 1024, 512 * 1024};
+    double results[10];
 
     //make connection
     int *fd = make_connection(port);
     int socket_fd = fd[0];
     int client_socket = fd[1];
-
-    // loop through different packet sizes
-    double result = -1;
-    double diff;
-    for (int j = 0; j < TEST_COUNT; j++){
-        while (-1 == (diff = measure_latency(m_size, client_socket))){}  
-        if (-1 == result || diff < result) {
-            result = diff;
+    for (int i = 0; i < sizeof(m_sizes)/sizeof(int); i++) {
+        // loop through different packet sizes
+        double result = -1;
+        double diff;
+        for (int j = 0; j < TEST_COUNT; j++){
+            while (-1 == (diff = measure_latency(m_sizes[i], client_socket))){}  
+            if (-1 == result || diff < result) {
+                result = diff;
+            }
         }
-    }
-    result_final = result/2;
-    
+        results[i] = result/2;
+    } 
     // close connection 
     close(socket_fd);
-    
-    printf("***** TEST latency for tcp %s, package size %d Byte: %f\n", host, m_size, result);
+   
+    for (int i = 0; i < sizeof(results)/sizeof(double); i++) { 
+        printf("***** TEST latency for tcp %s, package size %d Byte: %f\n", host, m_sizes[i], results[i]);
+    }
 }

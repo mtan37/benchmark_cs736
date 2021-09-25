@@ -56,15 +56,17 @@ int main(int argc , char *argv[]) {
     char *host = argv[1];
     
     char *ptr;
-    int m_size = strtol(argv[2], &ptr, 10);
-    int remote_port = strtol(argv[3], &ptr, 10);
-    const int TEST_COUNT = strtol(argv[4], &ptr, 10);
+    int remote_port = strtol(argv[2], &ptr, 10);
+    const int TEST_COUNT = strtol(argv[3], &ptr, 10);
+
+    int m_sizes[10] = {4, 16, 64, 256, 1024, 4 * 1024, 16 * 1024, 64 * 1024, 256 * 1024, 512 * 1024};
 
     //make connection
     int socket_fd = make_connection(host, remote_port);    
-
-    for (int j = 0; j < TEST_COUNT; j++){
-        while (-1 == measure_latency(host, m_size, socket_fd)){} 
+    for (int i = 0; i < sizeof(m_sizes)/sizeof(int); i++) {
+        for (int j = 0; j < TEST_COUNT; j++){
+            while (-1 == measure_latency(host, m_sizes[i], socket_fd)){} 
+        }
     }
     close(socket_fd);
 }
