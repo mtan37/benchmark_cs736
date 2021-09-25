@@ -4,7 +4,7 @@
 #include <unistd.h>
 #include <sys/socket.h>
 #include "benchutil.h"
-#include<sys/wait.h>
+#include <sys/wait.h>
 #include <errno.h>
 #include <string.h>
 
