@@ -41,16 +41,13 @@ double socketpair_c(const size_t m_size){
         while( byte_left > 0 &&
             -1 != (byte_read = read(sv[1], child_buf, byte_left))){
             byte_left = byte_left - byte_read; 
-//`            printf("child, byte read: %ld, byte left: %ld\n", byte_read, byte_left);
         }
 
         byte_left = m_size;
         while (byte_left > 0 &&
             -1 != (byte_written = write(sv[1], child_buf, byte_left))){
             byte_left = byte_left - byte_written;      
-            //printf("Child: byte write: %ld, byte left: %ld\n", byte_written, byte_left);
         }
-        //printf("child byte read%ld, error: %d\n", byte_read, errno);
     
         exit(0);
     } else {

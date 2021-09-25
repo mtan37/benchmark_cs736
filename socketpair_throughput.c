@@ -10,12 +10,13 @@
 
 const size_t BUF_SIZE = 512 * 1024;//512K bytes
 
-double socketpair_c(const size_t m_size, const size_t total_size){
+double socketpair_c(const size_t m_size, size_t packet_count){
     int sv[2];
     pid_t child_pid;
     unsigned a, b, c, d;
     uint64_t tick1, tick2;
-    size_t byte_written, byte_left, next_sent;       
+    size_t byte_written, byte_left, next_sent;
+    size_t total_size = m_size * packet_count; 
  
     if (0 != socketpair(AF_UNIX, SOCK_STREAM, 0, sv)) {
         fprintf(stderr, "Socketpair call failed\n");
@@ -33,8 +34,8 @@ double socketpair_c(const size_t m_size, const size_t total_size){
         // use the second socket
         close(sv[0]);
         //child process
-        char child_buf[m_size];
-        while(-1 != read(sv[1], child_buf, m_size)){
+        char child_buf[m_size * 5];// the magic number lol
+        while(-1 != read(sv[1], child_buf, m_size * 5)){
         }
     
         exit(0);
@@ -47,15 +48,18 @@ double socketpair_c(const size_t m_size, const size_t total_size){
         memset(parent_buf, '0', sizeof(parent_buf));
 
         /****/
-        byte_left = total_size;
-        next_sent = min(m_size, byte_left);
         asm volatile("rdtsc" : "=a" (a), "=d" (b)); //assembly code running the instruction rdtsc
-        while (next_sent > 0 &&
-            -1 != (byte_written = write(sv[0], parent_buf, next_sent))){
-            byte_left = byte_left - byte_written;
-            next_sent = min(m_size, byte_left);     
-            //memset(parent_buf, '0', next_sent);
-            //printf("Parent: byte write: %ld, byte left: %ld\n", byte_written, byte_left);
+        while (packet_count > 0 &&
+            -1 != (byte_written = write(sv[0], parent_buf, m_size))){
+            
+            if (byte_written != m_size) {
+                //write not successful, run abort
+                printf("Parent write error. m_size %ld, byte write %ld, retry\n", m_size, byte_written);
+                kill(child_pid, SIGKILL);
+                return -1;
+            }
+            packet_count = packet_count - 1; 
+            
         }
         /****/
         asm volatile("rdtsc" : "=a" (c), "=d" (d)); //assembly code running the instruction rdtsc
@@ -66,12 +70,13 @@ double socketpair_c(const size_t m_size, const size_t total_size){
         tick1 = calculate_tick(a,b);
         tick2 = calculate_tick(c,d);
         double diff = tick_to_ns(tick2, tick1);
+        return diff;
     }
 }
 
 int main(int argc, char*argv[]){
     const int TEST_COUNT = 20;
-    const int DATA_SIZE = 100;// in mb
+    const int DATA_SIZE = 100 * MB_TO_B;// in B
     int m_sizes[10] = {4, 16, 64, 256, 1024, 4 * 1024, 16 * 1024, 64 * 1024, 256 * 1024, 512 * 1024};
     double results[10];
     for (int i = 0; i < sizeof(m_sizes)/sizeof(int); i++) {
@@ -79,13 +84,15 @@ int main(int argc, char*argv[]){
         // loop through different packet sizes
         double result = -1;
         double diff;
+        const int PACKET_COUNT = DATA_SIZE/m_sizes[i];//in B
         for (int j = 0; j < TEST_COUNT; j++){
-            diff = socketpair_c(m_sizes[i], DATA_SIZE * MB_TO_B);  
+            while (-1 == (diff=socketpair_c(m_sizes[i], PACKET_COUNT))){}       
+            
             if (-1 == result || diff < result) {
                 result = diff;
             }
         }
-        results[i] = ((double)DATA_SIZE)/((double)result/S_TO_NS);
+        results[i] = ((double)DATA_SIZE/MB_TO_B)/((double)result/S_TO_NS);
     }
     
     for (int i = 0; i < sizeof(results)/sizeof(double); i++) {
