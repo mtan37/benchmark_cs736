@@ -4,5 +4,7 @@ precision
 kernel
 socketpair_throughput
 socketpair_latency
+tcp_latency_client
+tcp_latency_server
 *.bak
 .*
