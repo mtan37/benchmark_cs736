@@ -1,5 +1,5 @@
 #make file for the c practive program
-all: precision kernel socketpair_latency socketpair_throughput tcp_latency_server tcp_latency_client tcp_throughput_client tcp_throughput_server udp_latency_server udp_latency_client
+all: precision kernel socketpair_latency socketpair_throughput tcp_latency_server tcp_latency_client tcp_throughput_client tcp_throughput_server udp_latency_server udp_latency_client udp_throughput_client udp_throughput_server
 precision: precision.o benchutil.o
 	gcc -Wall -o precision precision.o benchutil.o
 kernel: kernel.o benchutil.o
@@ -16,6 +16,10 @@ udp_latency_server: udp_latency_server.o benchutil.o
 	gcc -Wall -o udp_latency_server udp_latency_server.o benchutil.o
 udp_latency_client: udp_latency_client.o benchutil.o
 	gcc -Wall -o udp_latency_client udp_latency_client.o benchutil.o
+udp_throughput_client: udp_throughput_client.o benchutil.o
+	gcc -Wall -o udp_throughput_client udp_throughput_client.o benchutil.o
+udp_throughput_server: udp_throughput_server.o benchutil.o
+	gcc -Wall -o udp_throughput_server udp_throughput_server.o benchutil.o
 tcp_throughput_client: tcp_throughput_client.o benchutil.o
 	gcc -Wall -o tcp_throughput_client tcp_throughput_client.o benchutil.o
 tcp_throughput_server: tcp_throughput_server.o benchutil.o
@@ -25,7 +29,10 @@ udp_latency_server.o: udp_latency_server.c benchutil.h
 	gcc -c udp_latency_server.c
 udp_latency_client.o: udp_latency_client.c benchutil.h
 	gcc -c udp_latency_client.c
-
+udp_throughput_server.o: udp_throughput_server.c benchutil.h
+	gcc -c udp_throughput_server.c
+udp_throughput_client.o: udp_throughput_client.c benchutil.h
+	gcc -c udp_throughput_client.c
 tcp_throughput_server.o: tcp_throughput_server.c benchutil.h
 	gcc -c tcp_throughput_server.c
 tcp_throughput_client.o: tcp_throughput_client.c benchutil.h
