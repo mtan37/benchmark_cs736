@@ -6,5 +6,9 @@ socketpair_throughput
 socketpair_latency
 tcp_latency_client
 tcp_latency_server
+tcp_throughput_client
+tcp_throughput_server
+udp_latency_client
+udp_latency_server
 *.bak
 .*
