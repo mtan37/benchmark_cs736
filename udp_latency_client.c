@@ -85,7 +85,7 @@ int main(int argc , char *argv[]) {
     close(socket_fd);
     
     for (int i = 0; i < sizeof(results)/sizeof(double); i++) {
-        printf("***** TEST latency for tcp %s, package size %d Byte: %f\n", host, m_sizes[i], results[i]);
+        printf("***** TEST latency for udp %s, package size %d Byte: %f\n", host, m_sizes[i], results[i]);
     }
 
 }
