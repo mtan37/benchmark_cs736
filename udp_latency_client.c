@@ -6,7 +6,7 @@
 #include <unistd.h>
 #include "benchutil.h"
 
-int measure_latency(char *server_host, size_t m_size, int socket_fd, int SERVER_PORT){
+double measure_latency(char *server_host, size_t m_size, int socket_fd, int SERVER_PORT){
     // START MEASUREMENT
     unsigned a, b, c, d;
     uint64_t tick1, tick2;   
