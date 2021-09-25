@@ -63,20 +63,20 @@ double socketpair_c(const size_t m_size){
 
         asm volatile("rdtsc" : "=a" (a), "=d" (b)); //assembly code running the instruction rdtsc
         /****/
-        byte_left = m_size;
-        while (byte_left > 0 &&
-            -1 != (byte_written = write(sv[0], parent_buf, byte_left))){
-            byte_left = byte_left - byte_written;      
-            //printf("Parent: byte write: %ld, byte left: %ld\n", byte_written, byte_left);
+        byte_written = write(sv[0], parent_buf, m_size);
+        if (-1 == byte_written || m_size != byte_written) {
+            printf("Parent write error. m_size %ld, byte write %ld, retry\n",
+                m_size, byte_written);
+            kill(child_pid, SIGKILL);            
+            return -1;
+            
         }
         
         byte_left = m_size;
         while( byte_left > 0 &&
             -1 != (byte_read = read(sv[0], parent_buf, byte_left))){
             byte_left = byte_left - byte_read; 
-            //printf("Parent: byte read: %ld, byte left: %ld\n", byte_read, byte_left);
         }
-        //printf("parent byte read%ld, error: %d\n", byte_read, errno);
         /****/
         asm volatile("rdtsc" : "=a" (c), "=d" (d)); //assembly code running the instruction rdtsc
         
@@ -86,6 +86,7 @@ double socketpair_c(const size_t m_size){
         tick1 = calculate_tick(a,b);
         tick2 = calculate_tick(c,d);
         double diff = tick_to_ns(tick2, tick1);
+        return diff;
     }
 }
 
@@ -94,13 +95,11 @@ int main(int argc, char*argv[]){
     int m_sizes[10] = {4, 16, 64, 256, 1024, 4 * 1024, 16 * 1024, 64 * 1024, 256 * 1024, 512 * 1024};
     double results[10];
     for (int i = 0; i < sizeof(m_sizes)/sizeof(int); i++) {
-        //printf("m size at i %d, %ld\n", i, m_sizes[i]);
         // loop through different packet sizes
         double result = -1;
         double diff;
         for (int j = 0; j < TEST_COUNT; j++){
-            diff = socketpair_c(m_sizes[i]);  
-            //printf("#%d socketpair latency (double) %f\n",j+1, diff); 
+            while (-1 == (diff = socketpair_c(m_sizes[i]))){}  
             if (-1 == result || diff < result) {
                 result = diff;
             }

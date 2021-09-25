@@ -1,10 +1,27 @@
-***** TEST latency for socket pair, package size 4 Byte: 4910.937500
-***** TEST latency for socket pair, package size 16 Byte: 5020.468750
-***** TEST latency for socket pair, package size 64 Byte: 3669.062500
-***** TEST latency for socket pair, package size 256 Byte: 5102.343750
-***** TEST latency for socket pair, package size 1000 Byte: 5160.937500
-***** TEST latency for socket pair, package size 4000 Byte: 5937.187500
-***** TEST latency for socket pair, package size 16000 Byte: 8539.062500
-***** TEST latency for socket pair, package size 64000 Byte: 14327.500000
-***** TEST latency for socket pair, package size 256000 Byte: 38841.406250
-***** TEST latency for socket pair, package size 512000 Byte: 70388.281250
+***** TEST latency for socket pair, package size 4 Byte: 4126.250000
+***** TEST latency for socket pair, package size 16 Byte: 4113.125000
+***** TEST latency for socket pair, package size 64 Byte: 4439.375000
+***** TEST latency for socket pair, package size 256 Byte: 4378.750000
+***** TEST latency for socket pair, package size 1024 Byte: 5424.218750
+***** TEST latency for socket pair, package size 4096 Byte: 5820.000000
+***** TEST latency for socket pair, package size 16384 Byte: 10619.375000
+***** TEST latency for socket pair, package size 65536 Byte: 17604.375000
+***** TEST latency for socket pair, package size 262144 Byte: 42651.875000
+***** TEST latency for socket pair, package size 524288 Byte: 71922.812500
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
