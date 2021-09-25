@@ -10,5 +10,7 @@ tcp_throughput_client
 tcp_throughput_server
 udp_latency_client
 udp_latency_server
+udp_throughput_client
+udp_throughput_server
 *.bak
 .*
