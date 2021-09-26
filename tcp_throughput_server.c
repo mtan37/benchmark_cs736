@@ -5,6 +5,7 @@
 #include <string.h>
 #include <unistd.h>
 #include "benchutil.h"
+#include <netinet/tcp.h>
 
 int *make_connection(const long LOCAL_PORT) {
     int socket_fd, client_socket;
@@ -12,6 +13,12 @@ int *make_connection(const long LOCAL_PORT) {
 
     if (-1 == (socket_fd=socket(AF_INET, SOCK_STREAM, 0))){
         fprintf(stderr, "server socket creation failed\n");
+        exit(1);
+    }
+    
+    int flag = 1;
+    if (0 > setsockopt(socket_fd, IPPROTO_TCP, TCP_NODELAY, (char *)&flag, sizeof(int))) {
+        fprintf(stderr, "set socket option failed\n"); 
         exit(1);
     }
  
@@ -103,11 +110,8 @@ int main(int argc , char *argv[]) {
             }
         }
         results[i] = ((double)DATA_SIZE/MB_TO_B)/((double)result/S_TO_NS);
+        printf("***** TEST throughput for tcp %s, package size %d Speed %f MiB/s\n", host, m_sizes[i], results[i]);
     } 
     // close connection 
     close(socket_fd);
-   
-    for (int i = 0; i < sizeof(results)/sizeof(double); i++) { 
-        printf("***** TEST throughput for tcp %s, package size %d Speed %f MiB/s\n", host, m_sizes[i], results[i]);
-    }
 }

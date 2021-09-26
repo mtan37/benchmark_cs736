@@ -5,6 +5,7 @@
 #include <string.h>
 #include <unistd.h>
 #include "benchutil.h"
+#include <netinet/tcp.h>
 
 int make_connection(char *server_host, const long SERVER_PORT) {
     int socket_fd;
@@ -13,6 +14,12 @@ int make_connection(char *server_host, const long SERVER_PORT) {
     if (-1 == (socket_fd=socket(AF_INET, SOCK_STREAM, 0))){
         fprintf(stderr, "server socket creation failed\n");
         return -1;
+    }
+    
+    int flag = 1;
+    if (0 > setsockopt(socket_fd, IPPROTO_TCP, TCP_NODELAY, (char *)&flag, sizeof(int))) {
+        fprintf(stderr, "set socket option failed\n"); 
+        exit(1);
     }
  
     // bind socket to a port 23576 
