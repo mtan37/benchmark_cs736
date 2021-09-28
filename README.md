@@ -1,5 +1,5 @@
 # benchmark_cs736
-
+Scirpts are divided based on experiements run for clarity.
 ## Measurement #1: Precision
 Measured rdstsc and clock, with rdtsc being more precise. Script can be run without argument
 ## Measurement #2: Kernel
